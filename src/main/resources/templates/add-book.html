@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/books/add" method="POST">
+  <div>
+    <label for="name">Book isbn</label>
+    <input type="text"
+           name="isbn"
+           th:value="(${debuk} != null ? ${debuk.getIsbn()} : '')"
+           required
+           placeholder="Enter book isbn">
+  </div>
+  <div>
+    <label for="name">Book title</label>
+    <input type="text"
+           class="form-control"
+           id="name"
+           name="title"
+           th:value="(${debuk} != null ? ${debuk.getTitle()} : '')"
+           required
+           placeholder="Enter product title">
+  </div>
+  <div >
+    <label for="price">Genre</label>
+    <input type="text"
+           class="form-control"
+           id="price"
+           name="genre"
+           th:value="(${debuk} != null ? ${debuk.getGenre()} : '')"
+           placeholder="Genre">
+  </div>
+  <div >
+    <label for="quantity">Year</label>
+    <input type="text"
+           id="quantity"
+           name="year"
+           th:value="(${debuk} != null ? ${debuk.getYear()} : '')"
+           placeholder="Year">
+  </div>
+  <div >
+    <label>Bookstore</label>
+    <select name="bookstoreId" >
+      <option th:if="${debuk} != null"
+              th:selected="${debuk.getBookstore() != null &&
+                                debuk.getBookstore().getId() == bookstore.getId()}"
+              th:each="bookstore : ${bookstores}"
+              th:value="${bookstore.getId()}"
+              th:text="${bookstore.getName()}">
+      </option>
+      <option th:if="${debuk} == null"
+              th:each="bookstore : ${bookstores}"
+              th:value="${bookstore.getId()}"
+              th:text="${bookstore.getName()}">
+      </option>
+    </select>
+  </div>
+
+  <button id="submit" type="submit">Submit</button>
+  <a type="button" href="/books">Back</a>
+</form>
+
+</body>
+</html>

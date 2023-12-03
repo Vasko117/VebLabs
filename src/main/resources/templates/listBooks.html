@@ -1,0 +1,44 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Books Homepage - Welcome to My Book Store</title>
+  <style type="text/css">
+    body {
+      width: 800px;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Welcome to My Book Store</h1>
+</header>
+<main>
+  <form th:action="@{/author}" th:method="GET">
+    <h2>Choose book:</h2>
+    <div th:each="book : ${books}">
+      <input type="radio" th:text="${book.getTitle()}+ ','+ ${book.getGenre()}+ ','+${book.getYear()}+ ','+${book.getBookstore().getName() }" name="bookISBN" th:value="${book.getIsbn()}">
+      <th:block>
+        <a th:href="@{'/books/delete/{isbn}' (isbn=${book.getIsbn()})}">
+          <i>Delete</i>
+        </a>
+        <a th:href="@{'/books/edit-form/{isbn}' (isbn=${book.getIsbn()})}">
+          <i>Edit</i>
+        </a>
+        <a th:href="@{'/books/copy-form/{isbn}' (isbn=${book.getIsbn()})}">
+          <i>copy</i>
+        </a>
+      </th:block>
+    </div>
+    <button type="submit">
+      <i>Submit   </i>
+    </button>
+  </form>
+  <div class="col-sm-12 col-md-12">
+    <a href="/books/add-form">
+      Add new book
+    </a>
+  </div>
+</main>
+</body>
+</html>
