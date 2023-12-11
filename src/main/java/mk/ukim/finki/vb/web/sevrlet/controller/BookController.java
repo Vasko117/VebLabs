@@ -90,6 +90,13 @@ public class BookController {
         this.bookService.addReview(isbn,score,description,date);
         return "redirect:/books";
     }
+    @PostMapping("/filter-rev{isbn}")
+    public String filter(@PathVariable String isbn,@RequestParam LocalDateTime from,
+                         @RequestParam LocalDateTime to) {
+        Book book=this.bookService.findBookByIsbn(isbn);
+        this.bookService.filterreview(from,to,book);
+        return "redirect:/books";
+    }
     @PostMapping("/getAuthors")
     public String gotoAuthors(@RequestParam String bookISBN, RedirectAttributes redirectAttributes) {
         redirectAttributes.addAttribute("bookISBN", bookISBN);

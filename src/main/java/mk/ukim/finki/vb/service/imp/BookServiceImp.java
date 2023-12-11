@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BookServiceImp implements BookService {
@@ -93,4 +94,18 @@ public class BookServiceImp implements BookService {
         }
 
     }
+
+    @Override
+    public void filterreview(LocalDateTime from, LocalDateTime to,Book book) {
+        List<Review> filteredReviews = book.getReviews().stream()
+                .filter(review -> review.getTimestamp().isAfter(from) && review.getTimestamp().isBefore(to))
+                .collect(Collectors.toList());
+
+        // Update the book's list of reviews with the filtered list
+        book.setReviews(filteredReviews);
+
+        // Save the book to persist the changes
+        this.booksrepo.save(book);
+    }
+
 }

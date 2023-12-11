@@ -30,7 +30,7 @@
 
 <header>
     <h1>Author name</h1>
-    <h2 th:text="${deauthor.getName()} + ' ' + ${deauthor.getSurname()}"></h2>
+    <h2 th:text="${deauthor.getFullname().getName()} + ' ' + ${deauthor.getFullname().getSurname()}"></h2>
 </header>
 <section>
     <h2>Books:</h2>

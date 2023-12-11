@@ -34,9 +34,24 @@
 </header>
 <section>
   <h2>Reviews:</h2>
-  <ul th:each="rev : ${debuk.getReviews()}">
-    <li th:text="${rev.getScore()} + ' ' + ${rev.getDescription()} + ' ' + ${#temporals.format(rev.getTimestamp(), 'dd-MM-yyyy HH:mm')} " >
-  </ul>
+  <div th:each="rev : ${debuk.getReviews()}">
+    <p>Score</p>
+    <p th:text="${rev.getScore()}"></p>
+    <p>Description</p>
+    <p th:text="${rev.getDescription()}"></p>
+    <p>Date of review</p>
+    <p th:text="${#temporals.format(rev.getTimestamp(), 'dd-MM-yyyy HH:mm')}"></p>
+  </div>
+  <form  th:method="POST" th:action="@{'/books/filter-rev/{isbn}' (isbn=${debuk.getIsbn()})}">
+    <input type="datetime-local"
+           name="from"
+           placeholder="Enter date from">
+    <input type="datetime-local"
+           id="date"
+           name="to"
+           placeholder="Enter date to">
+    <button type="submit">Filter reviews</button>
+  </form>
 </section>
 
 </body>

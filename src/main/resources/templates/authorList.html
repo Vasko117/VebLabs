@@ -34,7 +34,7 @@
   <form  th:method="POST" th:action="@{'/author/getDetails/{bookISBN}' (bookISBN=${debuk.getIsbn()})}">
     <h2>Select author:</h2>
     <div th:each="auth : ${authorss}">
-      <input type="radio" th:block th:text="${auth.getName()} + ' ' + ${auth.getSurname()} " th:value="${auth.getId()}" name="authorID" >
+      <input type="radio" th:block th:text="${auth.getFullname().getName()} + ' ' + ${auth.getFullname().getSurname()} " th:value="${auth.getId()}" name="authorID" >
     </div><input type='submit' value='Add author'>
   </form>
   <br/>

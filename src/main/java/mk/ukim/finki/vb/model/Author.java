@@ -25,7 +25,7 @@ public class Author {
     @Column(name = "author_id")
     private Long id;
 
-    @Convert(converter = AuthorFullName.class)
+    @Convert(converter = AuthorFullNameConverter.class)
     private AuthorFullName fullname;
 
     private String biography;

@@ -3,7 +3,7 @@ package mk.ukim.finki.vb.model;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
-@Converter
+@Converter(autoApply = true)
 public class AuthorFullNameConverter implements AttributeConverter<AuthorFullName,String> {
     private static final String SEPARATOR = ", ";
 

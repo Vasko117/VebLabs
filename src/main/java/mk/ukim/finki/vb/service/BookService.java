@@ -14,4 +14,5 @@ public interface BookService {
     void saveBook(String isbn, String title, String genre, int year, Long id);
     void copy(Book book);
     void addReview(String isbn, int score, String description, LocalDateTime date);
+    void filterreview(LocalDateTime from, LocalDateTime to,Book book);
 }

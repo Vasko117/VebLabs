@@ -14,10 +14,10 @@ public class AuthorRepository {
         return DataHolder.authors;
     }
     public Author save(Author k){
-        if(k==null || k.getName()==null || k.getName().isEmpty()){
+        if(k==null || k.getFullname().getName()==null || k.getFullname().getName().isEmpty()){
             return null;
         }
-        DataHolder.authors.removeIf(r->r.getName().equals(k.getName()));
+        DataHolder.authors.removeIf(r->r.getFullname().getName().equals(k.getFullname().getName()));
         DataHolder.authors.add(k);
         return k;
     }
@@ -25,7 +25,7 @@ public class AuthorRepository {
         return DataHolder.authors.stream().filter(r->r.getId().equals(id)).findFirst();
     }
     public List<Author> search(String text){
-        return DataHolder.authors.stream().filter(r->r.getName().contains(text) || r.getSurname().contains(text)).collect(Collectors.toList());
+        return DataHolder.authors.stream().filter(r->r.getFullname().getName().contains(text) || r.getFullname().getSurname().contains(text)).collect(Collectors.toList());
     }
     public void delete(String name)
     {
@@ -33,6 +33,6 @@ public class AuthorRepository {
         {
             return;
         }
-        DataHolder.authors.removeIf(r->r.getName().equals(name));
+        DataHolder.authors.removeIf(r->r.getFullname().getName().equals(name));
     }
 }

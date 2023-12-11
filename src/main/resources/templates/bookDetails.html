@@ -42,7 +42,7 @@
     <h2>Authors:</h2>
     <form th:action="@{/authordetail}" th:method="GET">
         <div th:each="author : ${debuk.getAuthors()}">
-            <input type="radio" th:text="${author.getName()} + ' ' + ${author.getSurname()} " name="authorID" th:value="${author.getId()}">
+            <input type="radio" th:text="${author.getFullname().getName()} + ' ' + ${author.getFullname().getSurname()} " name="authorID" th:value="${author.getId()}">
         </div>
         <input type='submit' value='View author books'>
     </form>

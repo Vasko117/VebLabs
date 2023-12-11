@@ -8,5 +8,5 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ReviewJpaRepository extends JpaRepository<Review,Long> {
-    List<Review> findAllByOrderDateAfterAndOrderDateBefore(LocalDateTime after, LocalDateTime before);
+    List<Review> findAllByTimestampBetween(LocalDateTime after, LocalDateTime before);
 }

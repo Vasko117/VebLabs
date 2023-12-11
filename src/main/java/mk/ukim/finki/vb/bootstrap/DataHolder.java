@@ -2,6 +2,7 @@ package mk.ukim.finki.vb.bootstrap;
 
 import jakarta.annotation.PostConstruct;
 import mk.ukim.finki.vb.model.Author;
+import mk.ukim.finki.vb.model.AuthorFullName;
 import mk.ukim.finki.vb.model.Book;
 import mk.ukim.finki.vb.model.Bookstore;
 import mk.ukim.finki.vb.repository.jpa.AuthJpaRepository;
@@ -32,11 +33,11 @@ public class DataHolder {
     public void init() {
         if(authors.size()==0)
         {
-            authors.add(Author.builder().name("William").surname("Shakespeare").biography("Smart").build());
-            authors.add(Author.builder().name("Agatha").surname("Cristie").biography("Smart").build());
-            authors.add(Author.builder().name("Barbara").surname("Cartland").biography("Smart").build());
-            authors.add(Author.builder().name("Harold").surname("Robbins").biography("Smart").build());
-            authors.add(Author.builder().name("Enid").surname("Blyton").biography("Smart").build());
+            authors.add(Author.builder().fullname(AuthorFullName.builder().name("William").surname("Shakespeare").build()).biography("Smart").build());
+            authors.add(Author.builder().fullname(AuthorFullName.builder().name("Agatha").surname("Cristie").build()).biography("Smart").build());
+            authors.add(Author.builder().fullname(AuthorFullName.builder().name("Barbara").surname("Cartland").build()).biography("Smart").build());
+            authors.add(Author.builder().fullname(AuthorFullName.builder().name("Harold").surname("Robbins").build()).biography("Smart").build());
+            authors.add(Author.builder().fullname(AuthorFullName.builder().name("Enid").surname("Blyton").build()).biography("Smart").build());
             authJpaRepository.saveAll(authors);
         }
         if(books.size()==0)
