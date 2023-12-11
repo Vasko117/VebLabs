@@ -1,69 +1,44 @@
 package mk.ukim.finki.vb.model;
 
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Entity
+@Table(name = "book_entity")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
 public class Book {
+
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Column(name = "book_id")
     private String isbn;
+
     private String title;
+
     private String genre;
+
     private int year;
+
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "book_author", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
     private List<Author> authors;
+
+    @ManyToOne
     private Bookstore bookstore;
 
-    public Book(String isbn, String title, String genre, int year, Bookstore bookstore) {
-        this.isbn = isbn;
-        this.title = title;
-        this.genre = genre;
-        this.year = year;
-        this.authors = new ArrayList<>();
-        this.bookstore=bookstore;
-    }
+    @OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
+    private List<Review> reviews;
 
-    public Bookstore getBookstore() {
-        return bookstore;
-    }
 
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public List<Author> getAuthors() {
-        return authors;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public void setAuthors(List<Author> authors) {
-        this.authors = authors;
-    }
 }

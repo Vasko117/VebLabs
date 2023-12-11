@@ -3,6 +3,7 @@ package mk.ukim.finki.vb.service;
 import mk.ukim.finki.vb.model.Author;
 import mk.ukim.finki.vb.model.Book;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface BookService {
@@ -12,4 +13,5 @@ public interface BookService {
     void deleteBook(String isbn);
     void saveBook(String isbn, String title, String genre, int year, Long id);
     void copy(Book book);
+    void addReview(String isbn, int score, String description, LocalDateTime date);
 }

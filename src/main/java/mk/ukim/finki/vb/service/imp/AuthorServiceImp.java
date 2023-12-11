@@ -2,6 +2,7 @@ package mk.ukim.finki.vb.service.imp;
 
 import mk.ukim.finki.vb.model.Author;
 import mk.ukim.finki.vb.repository.AuthorRepository;
+import mk.ukim.finki.vb.repository.jpa.AuthJpaRepository;
 import mk.ukim.finki.vb.service.AuthorService;
 import org.springframework.stereotype.Service;
 
@@ -10,14 +11,14 @@ import java.util.Optional;
 
 @Service
 public class AuthorServiceImp implements AuthorService {
-    private final AuthorRepository authrepo;
+    private final AuthJpaRepository authrepo;
 
-    public AuthorServiceImp(AuthorRepository authrepo) {
+    public AuthorServiceImp(AuthJpaRepository authrepo) {
         this.authrepo = authrepo;
     }
     @Override
     public List<Author> listAuthors(){
-        return authrepo.findall();
+        return authrepo.findAll();
     };
     @Override
     public Author findById(Long id){

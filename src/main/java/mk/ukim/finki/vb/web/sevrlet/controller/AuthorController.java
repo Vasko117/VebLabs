@@ -32,7 +32,7 @@ public class AuthorController {
     @PostMapping("/getDetails/{bookISBN}")
     public String gotoAuthors(@RequestParam String authorID, @PathVariable String bookISBN) {
         Long iid=Long.parseLong(authorID);
-        bookService.addAuthorToBook(iid,bookISBN);
+        this.bookService.addAuthorToBook(iid,bookISBN);
         return "redirect:/bookdetail?bookISBN=" + bookISBN;
     }
 }

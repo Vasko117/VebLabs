@@ -2,7 +2,6 @@ package mk.ukim.finki.vb.repository;
 
 import mk.ukim.finki.vb.bootstrap.DataHolder;
 import mk.ukim.finki.vb.model.Author;
-import mk.ukim.finki.vb.model.Kategorija;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

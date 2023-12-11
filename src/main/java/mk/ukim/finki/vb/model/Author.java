@@ -1,66 +1,38 @@
 package mk.ukim.finki.vb.model;
 
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
 public class Author {
-     Long id;
-     String name;
-    String surname;
-    String biography;
-    List<Book> books;
+
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private LocalDate dateOfBirth;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "author_id")
+    private Long id;
+
+    private String name;
+
+    private String surname;
+
+    private String biography;
+
+    @ManyToMany(mappedBy = "authors")
+    private List<Book> books;
 
 
-    public Author(Long id,String name, String surname) {
-        this.id=id;
-        this.name = name;
-        this.surname = surname;
-        this.books = new ArrayList<>();
-    }
-
-    public Author(Long id, String name, String surname, String biography) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.biography = biography;
-    }
-
-    public List<Book> getBooks() {
-        return books;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public String getBiography() {
-        return biography;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public void setBiography(String biography) {
-        this.biography = biography;
-    }
 }

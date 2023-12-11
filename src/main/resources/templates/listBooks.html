@@ -17,7 +17,7 @@
   <form th:action="@{/author}" th:method="GET">
     <h2>Choose book:</h2>
     <div th:each="book : ${books}">
-      <input type="radio" th:text="${book.getTitle()}+ ','+ ${book.getGenre()}+ ','+${book.getYear()}+ ','+${book.getBookstore().getName() }" name="bookISBN" th:value="${book.getIsbn()}">
+      <input type="radio" th:text="${book.getTitle()}+ ','+ ${book.getGenre()}+ ','+${book.getYear()}+ ','+${book.getBookstore().getName()}" name="bookISBN" th:value="${book.getIsbn()}">
       <th:block>
         <a th:href="@{'/books/delete/{isbn}' (isbn=${book.getIsbn()})}">
           <i>Delete</i>
@@ -27,6 +27,12 @@
         </a>
         <a th:href="@{'/books/copy-form/{isbn}' (isbn=${book.getIsbn()})}">
           <i>copy</i>
+        </a>
+        <a th:href="@{'/books/review-form/{isbn}' (isbn=${book.getIsbn()})}">
+          <i>Add review</i>
+        </a>
+        <a th:href="@{'/books/review-view/{isbn}' (isbn=${book.getIsbn()})}">
+          <i>View review</i>
         </a>
       </th:block>
     </div>

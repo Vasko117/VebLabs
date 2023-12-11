@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 
+import java.time.LocalDateTime;
+
 @Controller
 @RequestMapping("/books")
 public class BookController {
@@ -55,10 +57,22 @@ public class BookController {
         bookService.copy(book);
         return "redirect:/books";
     }
+    @GetMapping("/review-form/{isbn}")
+    public String reviewProductPage(@PathVariable String isbn, Model model) {
+        Book book=bookService.findBookByIsbn(isbn);
+        model.addAttribute("debuk", book);
+        return "review-add";
+    }
     @GetMapping("/add-form")
     public String addBookPage( Model model) {
         model.addAttribute("bookstores", this.bookStoreService.findAll());
         return "add-book";
+    }
+    @GetMapping("/review-view/{isbn}")
+    public String reviewview(@PathVariable String isbn, Model model) {
+        Book book=this.bookService.findBookByIsbn(isbn);
+        model.addAttribute("debuk", book);
+        return "view-rev";
     }
     @PostMapping("/add")
     public String saveProduct(@RequestParam String isbn,
@@ -67,6 +81,13 @@ public class BookController {
                               @RequestParam Integer year,
                               @RequestParam Long bookstoreId) {
         this.bookService.saveBook(isbn, title, genre, year, bookstoreId);
+        return "redirect:/books";
+    }
+    @PostMapping("/add-rev{isbn}")
+    public String addreview(@PathVariable String isbn,@RequestParam Integer score,
+                              @RequestParam String description,
+                              @RequestParam LocalDateTime date) {
+        this.bookService.addReview(isbn,score,description,date);
         return "redirect:/books";
     }
     @PostMapping("/getAuthors")

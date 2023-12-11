@@ -3,6 +3,7 @@ package mk.ukim.finki.vb.service.imp;
 import mk.ukim.finki.vb.model.Author;
 import mk.ukim.finki.vb.model.Bookstore;
 import mk.ukim.finki.vb.repository.BookStoreRepository;
+import mk.ukim.finki.vb.repository.jpa.BookStoreJpaRepository;
 import mk.ukim.finki.vb.service.BookStoreService;
 import org.springframework.stereotype.Service;
 
@@ -11,15 +12,15 @@ import java.util.Optional;
 
 @Service
 public class BookStoreServiceImpl implements BookStoreService {
-    private final BookStoreRepository bookStoreRepository;
+    private final BookStoreJpaRepository bookStoreRepository;
 
-    public BookStoreServiceImpl(BookStoreRepository bookStoreRepository) {
+    public BookStoreServiceImpl(BookStoreJpaRepository bookStoreRepository) {
         this.bookStoreRepository = bookStoreRepository;
     }
 
     @Override
     public List<Bookstore> findAll() {
-        return bookStoreRepository.findall();
+        return bookStoreRepository.findAll();
     }
     @Override
     public Bookstore findById(Long id){
