@@ -1,6 +1,8 @@
 package mk.ukim.finki.vb.web.sevrlet.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import mk.ukim.finki.vb.model.Book;
+import mk.ukim.finki.vb.model.User;
 import mk.ukim.finki.vb.service.BookStoreService;
 import org.springframework.ui.Model;
 import mk.ukim.finki.vb.service.AuthorService;
@@ -51,6 +53,23 @@ public class BookController {
         }
         return "redirect:/books?error=ProductNotFound";
     }
+    @GetMapping("/add-wishlist/{isbn}")
+    public String addtowishlist(HttpServletRequest req, @PathVariable String isbn, Model model) {
+        Book book=bookService.findBookByIsbn(isbn);
+       User u= (User) req.getSession().getAttribute("user");
+       if(!book.isIsinwishlist())
+       {
+           u.getWishlist().add(book);
+           book.setIsinwishlist(!book.isIsinwishlist());
+           this.bookService.save(book);
+       }
+       else {
+           u.getWishlist().remove(book);
+           book.setIsinwishlist(!book.isIsinwishlist());
+           this.bookService.save(book);
+       }
+        return "redirect:/books";
+    }
     @GetMapping("/copy-form/{isbn}")
     public String copyProductPage(@PathVariable String isbn, Model model) {
         Book book=bookService.findBookByIsbn(isbn);
@@ -63,6 +82,12 @@ public class BookController {
         model.addAttribute("debuk", book);
         return "review-add";
     }
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, Model model) {
+        request.getSession().invalidate();
+        return "login";
+    }
+
     @GetMapping("/add-form")
     public String addBookPage( Model model) {
         model.addAttribute("bookstores", this.bookStoreService.findAll());

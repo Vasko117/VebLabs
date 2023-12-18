@@ -108,4 +108,9 @@ public class BookServiceImp implements BookService {
         this.booksrepo.save(book);
     }
 
+    @Override
+    public void save(Book book) {
+        this.booksrepo.save(book);
+    }
+
 }

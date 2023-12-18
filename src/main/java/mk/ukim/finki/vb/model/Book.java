@@ -27,6 +27,8 @@ public class Book {
 
     private String genre;
 
+    boolean isinwishlist=false;
+
     private int year;
 
 

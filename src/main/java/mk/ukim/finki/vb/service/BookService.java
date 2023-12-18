@@ -15,4 +15,5 @@ public interface BookService {
     void copy(Book book);
     void addReview(String isbn, int score, String description, LocalDateTime date);
     void filterreview(LocalDateTime from, LocalDateTime to,Book book);
+    void save(Book book);
 }
